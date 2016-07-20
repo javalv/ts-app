@@ -1,29 +1,19 @@
 import {Refresher, InfiniteScroll, NavController,NavParams} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core';
 import {MyDetail} from '../../modules/detail/details';
-import {Routing} from '../../route/route';
-/**
- * Mock Data Access Object
- **/
-// @Injectable()
-// export class MockProvider {
-//
-//
-//
-//
-//
-// }
+
 
 @Component({
   templateUrl: 'build/demo/modules/list/list.html',
-  providers:[Routing]
 })
 export class MyList {
   items:any[];
-  private routing : Routing
-  constructor(params: NavParams,routing : Routing,public nav: NavController) {
+  constructor(
+      public params: NavParams,
+      public nav: NavController) {
+
     console.info(params)
-    this.routing = routing;
+
     setTimeout(() => {
       this.items = this.getData();
     },1000)
@@ -128,7 +118,6 @@ export class MyList {
   }
 
   gotoDetail(){
-    // this.routing.navTo('detail',{});
     this.nav.push(MyDetail,{});
   }
 }

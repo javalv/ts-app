@@ -1,18 +1,18 @@
 import {Component} from '@angular/core';
-import {Routing} from '../../route/route';
+import {NavController,NavParams} from 'ionic-angular';
+import {MyList} from "../list/list";
 
 @Component({
   templateUrl: 'build/demo/modules/home/home.html',
-  providers:[Routing]
 })
 export class HomePage {
-  private routing : Routing
-  constructor(routing : Routing ) {
-    this.routing = routing;
-  }
+  constructor(
+      public nav : NavController,
+      public params : NavParams
+  ) {}
 
   gotoList (){
-    this.routing.navTo('list',{});
+    this.nav.push(MyList,{});
   }
 
 }

@@ -8,6 +8,7 @@ import {MyDetail} from '../../demo/modules/detail/details';
 export class NameService {
   names: Array<string>;
 
+
   constructor() {
     this.names = ["Alice", "Aarav", "Martín", "Shannon", "Ariana", "Kai"];
   }

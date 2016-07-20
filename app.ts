@@ -15,7 +15,7 @@ import {MyDetail} from './demo/modules/detail/details';
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
-  rootPage: any = MyList;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform) {
     //platform.ready().then(() => {

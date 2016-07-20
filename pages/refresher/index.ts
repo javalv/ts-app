@@ -1,5 +1,5 @@
 import {App, Page, Refresher} from 'ionic-angular';
-import {Component} from '@angular/core';
+import {Component,Injectable} from '@angular/core';
 
 @Component({
     templateUrl: 'build/pages/refresher/main.html'
@@ -21,18 +21,30 @@ export class MyRefresher {
         console.log('DOREFRESH', refresher);
 
         var data = [
-            '张三',
-            '里斯',
-            '王五',
-            '里斯',
-            '张三',
-            '里斯',
-            '张三',
-            '里斯',
-            '王五',
-            '里斯',
-            '张三',
-            '里斯',
+          'Fast Times at Ridgemont High',
+          'Peggy Sue Got Married',
+          'Raising Arizona',
+          'Moonstruck',
+          'Fire Birds',
+          'Honeymoon in Vegas',
+          'Amos & Andrew',
+          'It Could Happen to You',
+          'Trapped in Paradise',
+          'Leaving Las Vegas',
+          'The Rock',
+          'Con Air',
+          'Face/Off',
+          'City of Angels',
+          'Gone in Sixty Seconds',
+          'The Family Man',
+          'Windtalkers',
+          'Matchstick Men',
+          'National Treasure',
+          'Ghost Rider',
+          'Grindhouse',
+          'Next',
+          'Kick-Ass',
+          'Drive Angry',
         ];
         var items = this.items;
 

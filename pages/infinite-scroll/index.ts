@@ -1,21 +1,16 @@
 import {InfiniteScroll} from 'ionic-angular';
-import {Component} from '@angular/core';
+import {Component,Injectable} from '@angular/core';
 
-
-@Component({
-  templateUrl: 'build/pages/infinite-scroll/main.html'
-})
-export class ApiDemoApp {
-  items: string[];
-
-  constructor() {
-    this.items = this.getData();
-  }
+/**
+ * Mock Data Access Object
+ **/
+@Injectable()
+export class MockProvider {
 
   getData() {
     // return mock data synchronously
     let data = [];
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 5; i++) {
       data.push( this._getRandomData() );
     }
     return data;
@@ -40,43 +35,45 @@ export class ApiDemoApp {
   private _data = [
     'Fast Times at Ridgemont High',
     'Peggy Sue Got Married',
-    'Raising Arizona',
-    'Moonstruck',
-    'Fire Birds',
-    'Honeymoon in Vegas',
-    'Amos & Andrew',
-    'It Could Happen to You',
-    'Trapped in Paradise',
-    'Leaving Las Vegas',
-    'The Rock',
-    'Con Air',
-    'Face/Off',
-    'City of Angels',
-    'Gone in Sixty Seconds',
-    'The Family Man',
-    'Windtalkers',
-    'Matchstick Men',
-    'National Treasure',
-    'Ghost Rider',
-    'Grindhouse',
-    'Next',
-    'Kick-Ass',
-    'Drive Angry',
+
   ];
 
-  public doInfinite(infiniteScroll: InfiniteScroll) {
-    this.getAsyncData().then((newData) => {
-      newData = this._data;
-      console.info(newData)
-      for (var i = 0; i < this._data.length; i++) {
-        this.items.push( this._data[i] );
+}
+
+
+@Component({
+  templateUrl: 'build/pages/infinite-scroll/main.html',
+  providers: [MockProvider]
+})
+export class MyInfiniteScroll {
+
+  items: string[];
+
+  constructor(private mockProvider: MockProvider) {
+    this.items = mockProvider.getData();
+  }
+
+  hasMore : boolean;
+  doInfinite(infiniteScroll: InfiniteScroll) {
+    // if(!this.hasMore){
+    //   return ;
+    // }
+    this.mockProvider.getAsyncData().then((newData:string[]) => {
+      for (var i = 0; i < newData.length; i++) {
+        this.items.push( newData[i] );
       }
 
       infiniteScroll.complete();
 
-      if (this.items.length > 90) {
+      // if (this.items.length > 90) {
+      //   infiniteScroll.enable(false);
+      // }
+
+      if(newData.length < 10){
         infiniteScroll.enable(false);
+        // this.hasMore = false;
       }
+
     });
   }
 

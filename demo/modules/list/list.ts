@@ -1,4 +1,4 @@
-import {Refresher, InfiniteScroll, NavController,NavParams} from 'ionic-angular';
+import {Refresher, InfiniteScroll, NavController, NavParams} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core';
 import {MyDetail} from '../../modules/detail/details';
 
@@ -8,15 +8,35 @@ import {MyDetail} from '../../modules/detail/details';
 })
 export class MyList {
   items:any[];
-  constructor(
-      public params: NavParams,
-      public nav: NavController) {
+  private _data : any[];
 
-    console.info(params)
+  constructor(public params:NavParams,
+              public nav:NavController) {
 
-    setTimeout(() => {
+    // console.info(params)
+
+    // setTimeout(() => {
+      this._data = [
+        {
+          name: "炎亚纶睡不著演唱会",
+          pic: "img/lyd.jpg",
+          time: "2016-10-10"
+        }, {
+          name: "李云迪演唱会",
+          pic: "img/lyd.jpg",
+          time: "2016-10-10"
+        }, {
+          name: "周华健演唱会",
+          pic: "img/zhj.png",
+          time: "2016-10-10"
+        }, {
+          name: "炎亚纶睡不著演唱会",
+          pic: "img/lyd.jpg",
+          time: "2016-10-10"
+        }
+      ];
       this.items = this.getData();
-    },1000)
+    // }, 1000)
   }
 
   doRefresh(refresher:Refresher) {
@@ -72,26 +92,6 @@ export class MyList {
     });
   }
 
-  private _data = [
-    {
-      name: "炎亚纶睡不著演唱会",
-      pic: "img/lyd.jpg",
-      time: "2016-10-10"
-    }, {
-      name: "李云迪演唱会",
-      pic: "img/lyd.jpg",
-      time: "2016-10-10"
-    }, {
-      name: "周华健演唱会",
-      pic: "img/zhj.png",
-      time: "2016-10-10"
-    }, {
-      name: "炎亚纶睡不著演唱会",
-      pic: "img/lyd.jpg",
-      time: "2016-10-10"
-    }
-  ];
-
   getData() {
     // return mock data synchronously
     let data = [];
@@ -117,8 +117,8 @@ export class MyList {
     return this._data[i];
   }
 
-  gotoDetail(){
-    this.nav.push(MyDetail,{});
+  gotoDetail() {
+    this.nav.push(MyDetail, {});
   }
 }
 

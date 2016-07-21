@@ -9,13 +9,15 @@ import {MyAction} from './pages/action-sheet/index';
 import {MyNav} from './pages/nav/pages';
 import {MyList} from './demo/modules/list/list';
 import {MyDetail} from './demo/modules/detail/details';
+import {E2EPage} from './demo/modules/virtual-scroll/basic/index';
 
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
-  rootPage: any = HomePage;
+  rootPage: any = E2EPage;
+
 
   constructor(platform: Platform) {
     //platform.ready().then(() => {

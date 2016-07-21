@@ -1,16 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-
-@Component({
-  templateUrl: './build/pages/nav/navigation-details.html',
-})
-class NavigationDetailsPage {
-  item;
-
-  constructor(params: NavParams) {
-    this.item = params.data.item;
-  }
-}
+import {NavigationDetailsPage} from '../../pages/nav/detail';
 
 @Component({
     templateUrl: './build/pages/nav/navigation.html'

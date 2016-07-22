@@ -10,13 +10,16 @@ import {MyNav} from './pages/nav/pages';
 import {MyList} from './demo/modules/list/list';
 import {MyDetail} from './demo/modules/detail/details';
 import {E2EPage} from './demo/modules/virtual-scroll/basic/index';
+import {MyViewCtrlPage} from './pages/view-controller/index';
+
+import {VoucherList} from './voucher/list/index';
 
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
-  rootPage: any = E2EPage;
+  rootPage: any = VoucherList;
 
 
   constructor(platform: Platform) {

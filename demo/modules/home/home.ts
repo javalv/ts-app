@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController,NavParams,Loading} from 'ionic-angular';
+import {NavController,NavParams,Loading,ViewController} from 'ionic-angular';
 import {MyList} from "../list/list";
 import {MyDetail} from "../detail/details";
 
@@ -9,7 +9,8 @@ import {MyDetail} from "../detail/details";
 export class HomePage {
   constructor(
       public nav : NavController,
-      public params : NavParams
+      public params : NavParams,
+      public viewCtrl: ViewController
   ) {}
 
   gotoList (){
@@ -37,6 +38,10 @@ export class HomePage {
 
 
 
+  }
+
+  ionViewWillEnter(){
+    console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
   }
 
 }

@@ -1,4 +1,4 @@
-import {Refresher, InfiniteScroll, NavController, NavParams} from 'ionic-angular';
+import {Refresher, InfiniteScroll, NavController, NavParams,ViewController} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core';
 import {MyDetail} from '../../modules/detail/details';
 
@@ -11,7 +11,9 @@ export class MyList {
   private _data : any[];
 
   constructor(public params:NavParams,
-              public nav:NavController) {
+              public nav:NavController,
+              public viewCtrl: ViewController
+  ) {
 
     // console.info(params)
 
@@ -119,6 +121,10 @@ export class MyList {
 
   gotoDetail() {
     this.nav.push(MyDetail, {});
+  }
+
+  ionViewWillEnter(){
+    console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
   }
 }
 

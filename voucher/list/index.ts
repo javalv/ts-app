@@ -1,6 +1,7 @@
-import {Refresher, InfiniteScroll, NavController, NavParams, ViewController} from 'ionic-angular';
+import {Refresher, InfiniteScroll, NavController, NavParams, ViewController,Popover} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core';
 import {VoucherDetail} from '../detail/index';
+import {RecordsList} from '../records/index';
 
 /**
  * Mock Data Access Object
@@ -64,16 +65,38 @@ class DataServiceProvider {
 }
 
 @Component({
+  template: `<ion-list>
+  <ion-item (click)="gotoRecords()">
+    <ion-icon name="ios-create-outline" item-left></ion-icon>
+      转赠纪录
+  </ion-item>
+  <ion-item>
+    <ion-icon name="ios-create" item-left></ion-icon>
+      我的订单
+  </ion-item>
+</ion-list>`
+})
+export class MyPopover{
+  constructor(
+      public nav:NavController) {
+  }
+  gotoRecords() {
+    this.nav.push(RecordsList, {});
+  }
+}
+
+@Component({
   templateUrl: 'build/voucher/list/main.html',
   providers: [DataServiceProvider]
 })
-export class VoucherList {
+class TabTextPage {
   items:any[];
 
   constructor(public service:DataServiceProvider,
               public params:NavParams,
               public nav:NavController,
               public viewCtrl:ViewController) {
+    console.log(this.nav.id)
     this.items = this.service.getData();
   }
 
@@ -112,9 +135,55 @@ export class VoucherList {
     this.nav.push(VoucherDetail, {});
   }
 
+
+
+
+  showPopover(ev){
+    let popover = Popover.create(MyPopover,{},{
+      //cssClass:'popover',
+      //showBackdrop:false
+    })
+    this.nav.present(popover, {
+      ev: ev
+    })
+  }
+
   ionViewWillEnter() {
     console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
   }
+}
+
+class TabTextPage1 extends TabTextPage{
+  constructor(public service:DataServiceProvider,
+              public params:NavParams,
+              public nav:NavController,
+              public viewCtrl:ViewController) {
+
+    super(service,params,nav,viewCtrl);
+
+  }
+}
+class TabTextPage2 extends TabTextPage{
+  constructor(public service:DataServiceProvider,
+              public params:NavParams,
+              public nav:NavController,
+              public viewCtrl:ViewController) {
+
+    super(service,params,nav,viewCtrl);
+
+  }
+}
+
+@Component({
+  template: `
+    <ion-tabs class="tabs-basic">
+      <ion-tab tabTitle="即将开始" [root]="tabOne"></ion-tab>
+      <ion-tab tabTitle="已经结束" [root]="tabTwo"></ion-tab>
+    </ion-tabs>
+`})
+export class VoucherList {
+  tabOne = TabTextPage1;
+  tabTwo = TabTextPage2;
 }
 
 

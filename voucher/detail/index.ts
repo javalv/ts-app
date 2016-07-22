@@ -26,7 +26,7 @@ class DataServiceProvider {
 }
 
 @Component({
-  templateUrl: 'build/voucher/list/main.html',
+  templateUrl: 'build/voucher/detail/main.html',
   providers: [DataServiceProvider]
 })
 export class VoucherDetail {

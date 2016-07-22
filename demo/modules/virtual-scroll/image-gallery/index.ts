@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ionicBootstrap } from '../../../../../src';
 
 
 @Component({
-  templateUrl: 'main.html',
+  templateUrl: 'build/demo/modules/virtual-scroll/image-gallery/main.html',
   encapsulation: ViewEncapsulation.None
 })
-class E2EPage {
+export class E2EPageImage {
   lastMonth: number;
   items = [];
 
@@ -19,7 +18,7 @@ class E2EPage {
       this.items.push({
         index: i,
         date: d,
-        imgSrc: `../../img/img/${images[rotateImg]}.jpg?${Math.random()}`,
+        imgSrc: `https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png?${Math.random()}`,
       });
 
       rotateImg++;
@@ -71,18 +70,6 @@ class E2EPage {
   }
 
 }
-
-
-@Component({
-  template: '<ion-nav [root]="root"></ion-nav>',
-})
-class E2EApp {
-  root = E2EPage;
-}
-
-ionicBootstrap(E2EApp, null, {
-  prodMode: true
-});
 
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 

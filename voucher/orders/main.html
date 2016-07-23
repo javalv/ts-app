@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>转让纪录</ion-title>
+    <ion-title>订单列表</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -21,11 +21,11 @@
     <p>{{item.time}}</p>
   </ion-item>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">-->
+    <!--<ion-infinite-scroll-content-->
+      <!--loadingSpinner="bubbles"-->
+      <!--loadingText="Loading more data...">-->
+    <!--</ion-infinite-scroll-content>-->
+  <!--</ion-infinite-scroll>-->
 
 </ion-content>

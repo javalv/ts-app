@@ -4,9 +4,9 @@ import {VoucherDetail} from '../detail/index';
 
 
 @Component({
-  templateUrl: 'build/voucher/records/main.html',
+  templateUrl: 'build/voucher/orders/main.html',
 })
-export class RecordsList {
+export class OrdersList {
   items:any[];
   private _data : any[];
 
@@ -21,19 +21,7 @@ export class RecordsList {
       this._data = [
         {
           name: "炎亚纶睡不著演唱会",
-          pic: "img/lyd.jpg",
-          time: "2016-10-10"
-        }, {
-          name: "李云迪演唱会",
-          pic: "img/lyd.jpg",
-          time: "2016-10-10"
-        }, {
-          name: "周华健演唱会",
-          pic: "img/zhj.png",
-          time: "2016-10-10"
-        }, {
-          name: "炎亚纶睡不著演唱会",
-          pic: "img/lyd.jpg",
+          pic: "img/yyl.jpg",
           time: "2016-10-10"
         }
       ];
@@ -47,19 +35,7 @@ export class RecordsList {
     var data = [
       {
         name: "炎亚纶睡不著演唱会",
-        pic: "img/lyd.jpg",
-        time: "2016-10-10"
-      }, {
-        name: "李云迪演唱会",
-        pic: "img/lyd.jpg",
-        time: "2016-10-10"
-      }, {
-        name: "周华健演唱会",
-        pic: "img/zhj.png",
-        time: "2016-10-10"
-      }, {
-        name: "炎亚纶睡不著演唱会",
-        pic: "img/lyd.jpg",
+        pic: "img/yyl.jpg",
         time: "2016-10-10"
       }
     ];
@@ -97,7 +73,7 @@ export class RecordsList {
   getData() {
     // return mock data synchronously
     let data = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 1; i++) {
       data.push(this._getRandomData());
     }
     return data;

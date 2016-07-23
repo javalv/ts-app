@@ -2,6 +2,7 @@ import {Refresher, InfiniteScroll, NavController, NavParams, ViewController,Popo
 import {Component, Injectable} from '@angular/core';
 import {VoucherDetail} from '../detail/index';
 import {RecordsList} from '../records/index';
+import {OrdersList} from '../orders/index';
 
 /**
  * Mock Data Access Object
@@ -37,7 +38,7 @@ class DataServiceProvider {
   private _data = [
     {
       name: "炎亚纶睡不著演唱会",
-      pic: "img/lyd.jpg",
+      pic: "img/yyl.jpg",
       venues: "北京鸟巢体育中心",
       seat: "6排11号",
       time: "2016-10-10 19:00"
@@ -55,7 +56,7 @@ class DataServiceProvider {
       time: "2016-10-10 19:00"
     }, {
       name: "炎亚纶睡不著演唱会",
-      pic: "img/lyd.jpg",
+      pic: "img/yyl.jpg",
       venues: "北京鸟巢体育中心",
       seat: "6排14号",
       time: "2016-10-10 19:00"
@@ -70,7 +71,7 @@ class DataServiceProvider {
     <ion-icon name="ios-create-outline" item-left></ion-icon>
       转赠纪录
   </ion-item>
-  <ion-item>
+  <ion-item (click)="gotoOrders()">
     <ion-icon name="ios-create" item-left></ion-icon>
       我的订单
   </ion-item>
@@ -79,6 +80,9 @@ class DataServiceProvider {
 export class MyPopover{
   constructor(
       public nav:NavController) {
+  }
+  gotoOrders() {
+    this.nav.push(OrdersList, {});
   }
   gotoRecords() {
     this.nav.push(RecordsList, {});
@@ -176,7 +180,7 @@ class TabTextPage2 extends TabTextPage{
 
 @Component({
   template: `
-    <ion-tabs class="tabs-basic">
+    <ion-tabs class="tabs-basic tabs" tabbarPlacement="top" preloadTabs="false">
       <ion-tab tabTitle="即将开始" [root]="tabOne"></ion-tab>
       <ion-tab tabTitle="已经结束" [root]="tabTwo"></ion-tab>
     </ion-tabs>

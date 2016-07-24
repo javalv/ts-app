@@ -26,22 +26,10 @@ export class HomePage {
       });
     });
 
-    // setTimeout(() => {
-    //   this.nav.push(MyList,{}).then(() => {
-    //     loading.dismiss();
-    //   });
-    // }, 100);
-
-    // setTimeout(() => {
-    //   loading.dismiss();
-    // }, 5000);
-
-
-
   }
 
   ionViewWillEnter(){
-    console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
+    console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index ' + this.viewCtrl.index);
   }
 
 }

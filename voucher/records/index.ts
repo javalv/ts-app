@@ -29,7 +29,7 @@ export class RecordsList {
           time: "2016-10-10"
         }, {
           name: "周华健演唱会",
-          pic: "img/zhj.png",
+          pic: "http://img0.imgtn.bdimg.com/it/u=2833344855,4176947989&fm=21&gp=0.jpg",
           time: "2016-10-10"
         }, {
           name: "炎亚纶睡不著演唱会",

@@ -11,6 +11,7 @@ import {MyList} from './demo/modules/list/list';
 import {MyDetail} from './demo/modules/detail/details';
 import {E2EPage} from './demo/modules/virtual-scroll/basic/index';
 import {MyViewCtrlPage} from './pages/view-controller/index';
+import {IconPage} from './pages/tabs/pages';
 
 import {VoucherList} from './voucher/list/index';
 

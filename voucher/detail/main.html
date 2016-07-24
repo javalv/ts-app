@@ -18,11 +18,14 @@
       <p>
         炎亚纶，本名吴庚霖，出生于1985年11月20日，中国台湾男歌手、演员，中国台湾男子团体飞轮海成员。2004年，炎亚纶首次参演电视剧《安室爱美惠》，电视剧代表作有：《终极一班》
       </p>
+      <p>
+        {{item.time}}
+      </p>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col>
-        <button clear small danger>
+        <button clear small danger (click)="gotoCheck()">
           <ion-icon name='md-checkmark-circle-outline'></ion-icon>
           换票
         </button>

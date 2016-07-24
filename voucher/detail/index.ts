@@ -1,5 +1,7 @@
 import {NavController, NavParams, ViewController} from 'ionic-angular';
-import {Component, Injectable} from '@angular/core';
+import {Component, Injectable} from '@angular/core'
+import {Http} from '@angular/http';
+import {VoucherQrcode} from '../qrcode/index';
 
 /**
  * Mock Data Access Object
@@ -7,10 +9,13 @@ import {Component, Injectable} from '@angular/core';
 @Injectable()
 class DataServiceProvider {
 
+
+  //private data : any;
   getData() {
     // return mock data synchronously
-    let data = this._data;
-    return data;
+
+
+
   }
 
   private _data = [
@@ -32,16 +37,32 @@ class DataServiceProvider {
 export class VoucherDetail {
   item:any;
 
-  constructor(public service:DataServiceProvider,
+  constructor(public servie:DataServiceProvider,
               public params:NavParams,
               public nav:NavController,
-              public viewCtrl:ViewController) {
-    this.item = this.service.getData();
+              public viewCtrl:ViewController,
+              public http:Http) {
+
+    this.item = {};
+    //service.getData();
+
   }
 
+  gotoCheck(){
+    this.nav.push(VoucherQrcode, {});
+  }
 
   ionViewWillEnter() {
+
+    console.log("id:"+this.nav.id);
+    //this.viewCtrl.showBackButton(false);
+    this.viewCtrl.setBackButtonText('');
     console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
+    this.http.get('json/people.json')
+        //.map(res => res.json())
+        .subscribe(data => {
+          this.item = data.json();
+        });
   }
 }
 

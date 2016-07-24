@@ -35,7 +35,7 @@
 }
 
 
-.tabs{
+.list-root{
   .tab-button:hover:not(.disable-hover),
   .tab-button[aria-selected=true]{
     color:red;
@@ -49,9 +49,13 @@
 
 .popover{
   .popover-content{
-    height: 120px;
-    //background-color: #222222;
-    //color: white;
+    background-color: rgba(82, 82, 82, 0.9);
+    color: white;
+    border-radius: 10px;
+    .item{
+      background-color: rgba(0, 0, 0, 0.0);
+      color: white;
+    }
   }
 
 }

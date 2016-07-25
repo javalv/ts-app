@@ -1,9 +1,10 @@
 import {Refresher, InfiniteScroll, NavController, NavParams, ViewController,Popover} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+// import {Http} from '@angular/http';
 import {VoucherDetail} from '../detail/index';
 import {RecordsList} from '../records/index';
 import {OrdersList} from '../orders/index';
+import {HttpService} from '../service/httpService';
 
 /**
  * Mock Data Access Object
@@ -106,21 +107,19 @@ export class MyPopover {
 
 @Component({
     templateUrl: 'build/voucher/list/main.html',
-    providers: [DataServiceProvider]
+    providers: [DataServiceProvider,HttpService]
 })
 class TabTextPage {
-    items:any[];
-
+    items:any[] ;
     private realNav : any;
 
     constructor(public service:DataServiceProvider,
                 public params:NavParams,
                 public nav:NavController,
                 public viewCtrl:ViewController,
-                public http:Http) {
+                public httpService:HttpService) {
         console.info("parent" + this.nav.parent);
-
-        //this.items = this.service.getData();
+        this.items = [];
         this.realNav = this.nav.parent.parent;
     }
 
@@ -175,11 +174,12 @@ class TabTextPage {
         console.log("id:"+this.nav.id)
         this.nav.remove(0);
         console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
-        this.http.get('json/peoples.json')
-            //.map(res => res.json())
-            .subscribe(data => {
-                this.items = data.json();
-            });
+        this.httpService.getAsyncData().then((data:any[]) => {
+          for (var i = 0; i < data.length; i++) {
+            this.items.push(data[i]);
+          }
+          // console.log(data);
+        })
     }
 }
 
@@ -188,7 +188,7 @@ class TabTextPage1 extends TabTextPage {
                 public params:NavParams,
                 public nav:NavController,
                 public viewCtrl:ViewController,
-                public http:Http) {
+                public http:HttpService) {
 
         super(service, params, nav, viewCtrl,http);
 
@@ -199,7 +199,7 @@ class TabTextPage2 extends TabTextPage {
                 public params:NavParams,
                 public nav:NavController,
                 public viewCtrl:ViewController,
-                public http:Http) {
+                public http:HttpService) {
 
         super(service, params, nav, viewCtrl,http);
 

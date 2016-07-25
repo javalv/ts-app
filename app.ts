@@ -12,6 +12,7 @@ import {MyDetail} from './demo/modules/detail/details';
 import {E2EPage} from './demo/modules/virtual-scroll/basic/index';
 import {MyViewCtrlPage} from './pages/view-controller/index';
 import {IconPage} from './pages/tabs/pages';
+import {MyDirectiveTest} from './pages/directives/index';
 
 import {VoucherList} from './voucher/list/index';
 
@@ -20,7 +21,7 @@ import {VoucherList} from './voucher/list/index';
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
-  rootPage: any = VoucherList;
+  rootPage: any = MyDirectiveTest;
 
 
   constructor(platform: Platform) {

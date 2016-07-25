@@ -2,7 +2,6 @@ import { Directive, Input ,OnInit} from '@angular/core';
 import { TemplateRef, ViewContainerRef, ElementRef } from '@angular/core';
 @Directive({
   selector: '[myUnless]',
-  // template: `<p>loading...</p>`
 })
 export class UnlessDirective implements OnInit {
   constructor(
@@ -15,17 +14,24 @@ export class UnlessDirective implements OnInit {
 
   ngOnInit(){
     console.log("ngOnInit");
-    console.log(this.templateRef);
-    console.log(this.elementRef);
+    //console.log(this.templateRef);
+    //console.log(this.elementRef.nativeElement);
 
-    // this.viewContainer.createEmbeddedView(this.templateRef);
+
+
+    //this.templateRef.createEmbeddedView('<p>abcd</p>')
+
+    //ElementRef elementRef = new ElementRef();
+    //this.templateRef.createEmbeddedView(elementRef);
+
+     this.viewContainer.createEmbeddedView(this.templateRef);
   }
 
 
-  @Input() set myUnless(condition: boolean) {
-    console.log("set myUnless: " + condition);
-    if (condition) {
-      this.viewContainer.clear();
-    }
-  }
+  //@Input() set myUnless(condition: boolean) {
+  //  console.log("set myUnless: " + condition);
+  //  if (condition) {
+  //    this.viewContainer.clear();
+  //  }
+  //}
 }

@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import { UnlessDirective } from './myDirective';
+//import { UnlessDirective } from './myDirective';
+import { MyComponent } from './myComponet';
 @Component({
   templateUrl: 'build/pages/directives/main.html',
-  directives:[UnlessDirective]
+  directives:[MyComponent]
   // providers:[UnlessDirective]
 })
 export class MyDirectiveTest {
@@ -14,7 +15,7 @@ export class MyDirectiveTest {
   ionViewWillEnter( ){
     setTimeout(() => {
       this.loaded = true;
-    },2000)
+    },10000)
   }
 
 }

@@ -6,8 +6,12 @@
 
   <!--<p *myUnless="loaded">这是一个测试页面</p>-->
 
-  <div *myUnless="loaded">
-    <button danger>测试页面</button>
-  </div>
+  <!--<div *myUnless="loaded">-->
+    <!--<button danger>测试页面</button>-->
+  <!--</div>-->
+
+  <hero-app [loaded]="loaded"></hero-app>
+    <p >这是一个测试页面</p>
+
 
 </ion-content>

@@ -1,4 +1,4 @@
-import {Component, OnInit, Injectable} from '@angular/core';
+import {Component, OnInit,OnChanges} from '@angular/core';
 import {TemplateRef, ViewContainerRef, ElementRef, Input, SimpleChange} from '@angular/core';
 import {UnlessDirective} from './myDirective';
 

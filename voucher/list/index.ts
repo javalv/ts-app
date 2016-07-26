@@ -1,10 +1,11 @@
-import {Refresher, InfiniteScroll, NavController, NavParams, ViewController,Popover} from 'ionic-angular';
-import {Component, Injectable} from '@angular/core';
+import {Refresher, InfiniteScroll, NavController, NavParams, ViewController, Popover} from 'ionic-angular';
+import {Component, Injectable,EventEmitter,Input,Output} from '@angular/core';
 // import {Http} from '@angular/http';
 import {VoucherDetail} from '../detail/index';
 import {RecordsList} from '../records/index';
 import {OrdersList} from '../orders/index';
 import {HttpService} from '../service/httpService';
+import {MyComponent} from '../directives/myComponet';
 
 /**
  * Mock Data Access Object
@@ -12,63 +13,63 @@ import {HttpService} from '../service/httpService';
 @Injectable()
 class DataServiceProvider {
 
-    getData() {
-        // return mock data synchronously
-        let data = [];
-        for (var i = 0; i < 5; i++) {
-            data.push(this._getRandomData());
-        }
-        return data;
+  getData() {
+    // return mock data synchronously
+    let data = [];
+    for (var i = 0; i < 5; i++) {
+      data.push(this._getRandomData());
     }
+    return data;
+  }
 
-    getAsyncData() {
-        // async receive mock data
-        return new Promise(resolve => {
+  getAsyncData() {
+    // async receive mock data
+    return new Promise(resolve => {
 
-            setTimeout(() => {
-                resolve(this.getData());
-            }, 1000);
+      setTimeout(() => {
+        resolve(this.getData());
+      }, 1000);
 
-        });
+    });
+  }
+
+  private _getRandomData() {
+    let i = Math.floor(Math.random() * this._data.length);
+    return this._data[i];
+  }
+
+  private _data = [
+    {
+      name: "炎亚纶睡不著演唱会",
+      pic: "img/yyl.jpg",
+      venues: "北京鸟巢体育中心",
+      seat: "6排11号",
+      time: "2016-10-10 19:00"
+    }, {
+      name: "李云迪演唱会",
+      pic: "img/lyd.jpg",
+      venues: "北京鸟巢体育中心",
+      seat: "6排12号",
+      time: "2016-10-10 19:00"
+    }, {
+      name: "周华健演唱会",
+      pic: "img/zhj.png",
+      venues: "北京鸟巢体育中心",
+      seat: "6排13号",
+      time: "2016-10-10 19:00"
+    }, {
+      name: "炎亚纶睡不著演唱会",
+      pic: "img/yyl.jpg",
+      venues: "北京鸟巢体育中心",
+      seat: "6排14号",
+      time: "2016-10-10 19:00"
     }
-
-    private _getRandomData() {
-        let i = Math.floor(Math.random() * this._data.length);
-        return this._data[i];
-    }
-
-    private _data = [
-        {
-            name: "炎亚纶睡不著演唱会",
-            pic: "img/yyl.jpg",
-            venues: "北京鸟巢体育中心",
-            seat: "6排11号",
-            time: "2016-10-10 19:00"
-        }, {
-            name: "李云迪演唱会",
-            pic: "img/lyd.jpg",
-            venues: "北京鸟巢体育中心",
-            seat: "6排12号",
-            time: "2016-10-10 19:00"
-        }, {
-            name: "周华健演唱会",
-            pic: "img/zhj.png",
-            venues: "北京鸟巢体育中心",
-            seat: "6排13号",
-            time: "2016-10-10 19:00"
-        }, {
-            name: "炎亚纶睡不著演唱会",
-            pic: "img/yyl.jpg",
-            venues: "北京鸟巢体育中心",
-            seat: "6排14号",
-            time: "2016-10-10 19:00"
-        }
-    ];
+  ];
 
 }
 
 @Component({
-    template: `<ion-list>
+  template: `<ion-list>
   <ion-item (click)="gotoRecords()">
     <ion-icon name="ios-create-outline" item-left></ion-icon>
       转赠纪录
@@ -80,148 +81,170 @@ class DataServiceProvider {
 </ion-list>`
 })
 export class MyPopover {
-    constructor(public nav:NavController,
-                public viewCtrl:ViewController) {
-    }
+  constructor(public nav:NavController,
+              public viewCtrl:ViewController) {
+  }
 
-    gotoRecords() {
+  gotoRecords() {
 
-        this.nav.push(RecordsList, {}).then((T) => {
-            console.log(T);
-            this.close();
-        });
-    }
+    this.nav.push(RecordsList, {}).then((T) => {
+      console.log(T);
+      this.close();
+    });
+  }
 
-    gotoOrders() {
+  gotoOrders() {
 
-        this.nav.push(OrdersList, {}).then((T) => {
-            console.log(T);
-            this.close();
-        });
-    }
+    this.nav.push(OrdersList, {}).then((T) => {
+      console.log(T);
+      this.close();
+    });
+  }
 
-    private close() {
-        this.viewCtrl.dismiss();
-    }
+  private close() {
+    this.viewCtrl.dismiss();
+  }
 }
 
 @Component({
-    templateUrl: 'build/voucher/list/main.html',
-    providers: [DataServiceProvider,HttpService]
+  templateUrl: 'build/voucher/list/main.html',
+  providers: [DataServiceProvider, HttpService],
+  directives:[MyComponent]
 })
 class TabTextPage {
-    items:any[] ;
-    private realNav : any;
+  loaded:boolean;
+  items:any[];
+  private realNav:any;
 
-    constructor(public service:DataServiceProvider,
-                public params:NavParams,
-                public nav:NavController,
-                public viewCtrl:ViewController,
-                public httpService:HttpService) {
-        console.info("parent" + this.nav.parent);
-        this.items = [];
-        this.realNav = this.nav.parent.parent;
-    }
+  constructor(public service:DataServiceProvider,
+              public params:NavParams,
+              public nav:NavController,
+              public viewCtrl:ViewController,
+              public httpService:HttpService) {
+    console.info("parent" + this.nav.parent);
+    this.items = [];
+    this.realNav = this.nav.parent.parent;
+    this.loaded = false;
+  }
 
-    doRefresh(refresher:Refresher) {
-        var data = this.service.getData();
-        var items = this.items;
-        setTimeout(() => {
-            for (var i = 0; i < data.length; i++) {
-                items.unshift(data[i]);
-            }
-            refresher.complete();
-        }, 1000);
+  doRefresh(refresher:Refresher) {
+    var data = this.service.getData();
+    var items = this.items;
+    setTimeout(() => {
+      for (var i = 0; i < data.length; i++) {
+        items.unshift(data[i]);
+      }
+      refresher.complete();
+    }, 1000);
 
-    }
+  }
 
-    doPulling(refresher:Refresher) {
-        console.log('DOPULLING', refresher.progress);
-    }
+  doPulling(refresher:Refresher) {
+    console.log('DOPULLING', refresher.progress);
+  }
 
-    doInfinite(infiniteScroll:InfiniteScroll) {
-        this.service.getAsyncData().then((newData:string[]) => {
-            for (var i = 0; i < newData.length; i++) {
-                this.items.push(newData[i]);
-            }
+  doInfinite(infiniteScroll:InfiniteScroll) {
+    this.service.getAsyncData().then((newData:string[]) => {
+      for (var i = 0; i < newData.length; i++) {
+        this.items.push(newData[i]);
+      }
 
-            infiniteScroll.complete();
+      infiniteScroll.complete();
 
-            if (newData.length < 10) {
-                infiniteScroll.enable(false);
-            }
+      if (newData.length < 10) {
+        infiniteScroll.enable(false);
+      }
 
-        });
-    }
+    });
+  }
 
-    gotoDetail() {
+  gotoDetail() {
 
-        this.realNav.push(VoucherDetail, {});
-    }
+    this.realNav.push(VoucherDetail, {});
+  }
 
 
-    showPopover(ev) {
-        let popover = Popover.create(MyPopover, {}, {
-            cssClass: 'popover',
-            //showBackdrop:false
-        })
-        this.nav.present(popover, {
-            ev: ev
-        })
-    }
+  showPopover(ev) {
+    let popover = Popover.create(MyPopover, {}, {
+      cssClass: 'popover',
+      //showBackdrop:false
+    })
+    this.nav.present(popover, {
+      ev: ev
+    })
 
-    ionViewWillEnter() {
-        console.log("id:"+this.nav.id)
-        this.nav.remove(0);
-        console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
-        this.httpService.getAsyncData().then((data:any[]) => {
-          for (var i = 0; i < data.length; i++) {
-            this.items.push(data[i]);
-          }
-          // console.log(data);
-        })
-    }
+
+  }
+
+  ionViewWillEnter() {
+    console.log("id:" + this.nav.id)
+    this.nav.remove(0);
+    console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);
+    this.httpService.getAsyncData().then((data:any[]) => {
+      for (var i = 0; i < data.length; i++) {
+        this.items.push(data[i]);
+      }
+      // console.log(data);
+      this.loaded = true;
+    })
+
+    // var t = this;
+    // setTimeout(()=> {
+    //   t.loaded = true;
+    // }, 2000)
+  }
+
+
 }
 
 class TabTextPage1 extends TabTextPage {
-    constructor(public service:DataServiceProvider,
-                public params:NavParams,
-                public nav:NavController,
-                public viewCtrl:ViewController,
-                public http:HttpService) {
+  constructor(public service:DataServiceProvider,
+              public params:NavParams,
+              public nav:NavController,
+              public viewCtrl:ViewController,
+              public http:HttpService) {
 
-        super(service, params, nav, viewCtrl,http);
+    super(service, params, nav, viewCtrl, http);
 
-    }
+  }
 }
 class TabTextPage2 extends TabTextPage {
-    constructor(public service:DataServiceProvider,
-                public params:NavParams,
-                public nav:NavController,
-                public viewCtrl:ViewController,
-                public http:HttpService) {
+  constructor(public service:DataServiceProvider,
+              public params:NavParams,
+              public nav:NavController,
+              public viewCtrl:ViewController,
+              public http:HttpService) {
 
-        super(service, params, nav, viewCtrl,http);
+    super(service, params, nav, viewCtrl, http);
 
-    }
+  }
 }
 
 @Component({
-    template: `
+  template: `<loading-div [loaded]="loaded"></loading-div>
     <ion-tabs class="tabs-basic list-root" tabbarPlacement="top"
      preloadTabs="false">
       <ion-tab tabTitle="即将开始" [root]="tabOne" ></ion-tab>
       <ion-tab tabTitle="已经结束" [root]="tabTwo" ></ion-tab>
     </ion-tabs>
-`
+`,
+  directives:[MyComponent]
 })
 export class VoucherList {
-    constructor(
-        public nav:NavController){
+  loaded:boolean;
+  constructor(public nav:NavController) {
+    this.loaded = false;
+  }
 
-    }
-    tabOne = TabTextPage1;
-    tabTwo = TabTextPage2;
+  tabOne = TabTextPage1;
+  tabTwo = TabTextPage2;
+
+  ionViewWillEnter() {
+    setTimeout(() => {
+      this.loaded = true;
+    },2000)
+  }
+
 }
 
 

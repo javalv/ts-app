@@ -15,7 +15,7 @@ export class MyDirectiveTest {
   ionViewWillEnter( ){
     setTimeout(() => {
       this.loaded = true;
-    },10000)
+    },5000)
   }
 
 }

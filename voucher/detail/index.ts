@@ -2,11 +2,13 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core'
 import {HttpService} from '../service/httpService';
 import {VoucherQrcode} from '../qrcode/index';
+import {MyComponent} from '../directives/myComponet'
 
 
 @Component({
   templateUrl: 'build/voucher/detail/main.html',
-  providers: [HttpService]
+  providers: [HttpService],
+  directives: [MyComponent]
 })
 export class VoucherDetail {
   item:any;
@@ -36,7 +38,6 @@ export class VoucherDetail {
       this.item = data;
       setTimeout(() => {
         this.loaded = true;
-
       },1000)
     })
 

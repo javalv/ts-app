@@ -1,4 +1,4 @@
-import {Refresher, InfiniteScroll, NavController, NavParams, ViewController, Popover} from 'ionic-angular';
+import {Refresher, InfiniteScroll, NavController, NavParams, ViewController, Popover,Loading} from 'ionic-angular';
 import {Component, Injectable,EventEmitter,Input,Output} from '@angular/core';
 // import {Http} from '@angular/http';
 import {VoucherDetail} from '../detail/index';
@@ -160,7 +160,9 @@ class TabTextPage {
 
   gotoDetail() {
 
-    this.realNav.push(VoucherDetail, {});
+      this.realNav.push(VoucherDetail, {}).then(()=>{
+
+      });
   }
 
 
@@ -168,10 +170,26 @@ class TabTextPage {
     let popover = Popover.create(MyPopover, {}, {
       cssClass: 'popover',
       //showBackdrop:false
+
     })
-    this.nav.present(popover, {
-      ev: ev
-    })
+
+    let loading = Loading.create({
+      spinner: 'hide',
+      // showBackdrop:false,
+      duration: 1000
+    });
+
+    this.nav.present(loading).then(()=>{
+      this.nav.present(popover, {
+        ev: ev
+      }).then(()=>{
+        // loading.dismiss();
+      });
+    });
+
+    // this.nav.present(popover, {
+    //   ev: ev
+    // })
 
 
   }
@@ -221,7 +239,7 @@ class TabTextPage2 extends TabTextPage {
 }
 
 @Component({
-  template: `<loading-div [loaded]="loaded"></loading-div>
+  template: `<!--<loading-div [loaded]="loaded"></loading-div>-->
     <ion-tabs class="tabs-basic list-root" tabbarPlacement="top"
      preloadTabs="false">
       <ion-tab tabTitle="即将开始" [root]="tabOne" ></ion-tab>
@@ -242,7 +260,7 @@ export class VoucherList {
   ionViewWillEnter() {
     setTimeout(() => {
       this.loaded = true;
-    },2000)
+    },1000)
   }
 
 }

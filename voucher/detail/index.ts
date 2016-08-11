@@ -1,4 +1,4 @@
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController, Loading} from 'ionic-angular';
 import {Component, Injectable} from '@angular/core'
 import {HttpService} from '../service/httpService';
 import {VoucherQrcode} from '../qrcode/index';
@@ -12,23 +12,25 @@ import {MyComponent} from '../directives/myComponet'
 })
 export class VoucherDetail {
   item:any;
-  constructor(
-              public params:NavParams,
+
+  constructor(public params:NavParams,
               public nav:NavController,
               public viewCtrl:ViewController,
               public http:HttpService) {
 
     this.item = {};
     //service.getData();
+
   }
 
-  gotoCheck(){
+  gotoCheck() {
     this.nav.push(VoucherQrcode, {});
   }
 
   ionViewWillEnter() {
 
-    console.log("id:"+this.nav.id);
+
+    console.log("id:" + this.nav.id);
     //this.viewCtrl.showBackButton(false);
     this.viewCtrl.setBackButtonText('');
     console.log('Do we have a Navbar?', this.viewCtrl.hasNavbar() + ' index' + this.viewCtrl.index);

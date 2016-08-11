@@ -74,35 +74,44 @@ class DataServiceProvider {
     <ion-icon name="ios-create-outline" item-left></ion-icon>
       转赠纪录
   </ion-item>
-  <ion-item (click)="gotoOrders()">
-    <ion-icon name="ios-create" item-left></ion-icon>
-      我的订单
-  </ion-item>
+  <!--<ion-item (click)="gotoOrders()">-->
+    <!--<ion-icon name="ios-create" item-left></ion-icon>-->
+      <!--我的订单-->
+  <!--</ion-item>-->
 </ion-list>`
 })
 export class MyPopover {
   constructor(public nav:NavController,
               public viewCtrl:ViewController) {
+
   }
 
   gotoRecords() {
+    let data = this.viewCtrl.data;
+    let rootPage = data["obj"];
 
-    this.nav.push(RecordsList, {}).then((T) => {
-      console.log(T);
-      this.close();
-    });
+    this.close().then(()=>{
+      rootPage.gotoRecords().then(()=>{
+        console.log("gotoRecords ok ");
+      });
+    })
+
+    // data["obj"].gotoRecords().then(()=>{
+    //   this.close();
+    // });
+
   }
 
   gotoOrders() {
 
     this.nav.push(OrdersList, {}).then((T) => {
-      console.log(T);
+      // console.log(T);
       this.close();
     });
   }
 
   private close() {
-    this.viewCtrl.dismiss();
+    return this.viewCtrl.dismiss('backdrop');
   }
 }
 
@@ -158,7 +167,13 @@ class TabTextPage {
     });
   }
 
+  gotoRecords() {
+    return this.realNav.push(RecordsList, {});
+  }
+
   gotoDetail() {
+    console.log(this.nav)
+    console.log(this.realNav)
 
       this.realNav.push(VoucherDetail, {}).then(()=>{
 
@@ -167,25 +182,31 @@ class TabTextPage {
 
 
   showPopover(ev) {
-    let popover = Popover.create(MyPopover, {}, {
-      cssClass: 'popover',
-      //showBackdrop:false
 
+    let popover = Popover.create(MyPopover, {"obj":this}, {
+      cssClass: 'popover',
+      // showBackdrop:false
     })
 
-    let loading = Loading.create({
-      spinner: 'hide',
-      // showBackdrop:false,
-      duration: 1000
+    this.nav.present(popover, {
+      ev: ev
+    }).then(()=>{
+      // loading.dismiss();
     });
 
-    this.nav.present(loading).then(()=>{
-      this.nav.present(popover, {
-        ev: ev
-      }).then(()=>{
-        // loading.dismiss();
-      });
-    });
+    // let loading = Loading.create({
+    //   spinner: 'hide',
+    //   // showBackdrop:false,
+    //   duration: 1000
+    // });
+    //
+    // this.nav.present(loading).then(()=>{
+    //   this.nav.present(popover, {
+    //     ev: ev
+    //   }).then(()=>{
+    //     // loading.dismiss();
+    //   });
+    // });
 
     // this.nav.present(popover, {
     //   ev: ev

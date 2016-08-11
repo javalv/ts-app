@@ -1,6 +1,11 @@
 import {Component} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+//angular test
+import {LoopbackComponent} from './test/angular/InputTest';
+import {InjectableTest} from './test/angular/InjectableTest';
+
+
 import {HomePage} from './demo/modules/home/home';
 import {MyInfiniteScroll} from  './pages/infinite-scroll/index';
 import {MyRefresher} from './pages/refresher/index';
@@ -16,15 +21,17 @@ import {MyDirectiveTest} from './pages/directives/index';
 import {MyComponent} from './voucher/directives/myComponet';
 // import {Queue} from './voucher/directives/queue';
 
+
 import {VoucherList} from './voucher/list/index';
 
+import {MapHome} from './map/home/index';
 
 @Component({
   template: ` <ion-nav  [root]="rootPage">
               </ion-nav>`
 })
 export class MyApp {
-  rootPage: any = VoucherList;
+  rootPage: any = InjectableTest;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

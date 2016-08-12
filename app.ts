@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, Splashscreen} from 'ionic-native';
 //angular test
 import {LoopbackComponent} from './test/angular/InputTest';
 import {InjectableTest} from './test/angular/InjectableTest';
@@ -31,16 +31,17 @@ import {MapHome} from './map/home/index';
               </ion-nav>`
 })
 export class MyApp {
-  rootPage: any = InjectableTest;
+  rootPage:any = VoucherList;
 
-  constructor(platform: Platform) {
+  constructor(platform:Platform) {
+    Splashscreen.show();
     platform.ready().then(() => {
-     // Okay, so the platform is ready and our plugins are available.
-     // Here you can do any higher level native things you might need.
-     StatusBar.styleDefault();
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+      // Splashscreen.hide();
     });
   }
 
 }
-
 ionicBootstrap(MyApp);

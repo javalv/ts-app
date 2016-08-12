@@ -14,12 +14,4 @@ export class HeroService{
   }
 }
 
-let heroServiceFactory = (name:string) => {
-  return new HeroService(name);
-};
 
-export let heroServiceProvider =
-{ provide: HeroService,
-  useFactory: heroServiceFactory,
-  // deps: [Logger, UserService]
-};

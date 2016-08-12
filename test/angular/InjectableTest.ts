@@ -1,16 +1,20 @@
-import {Component} from '@angular/core';
-import {heroServiceProvider, HeroService} from "./HeroService";
+import {Component, Injector} from '@angular/core';
+import {HeroService} from "./HeroService";
+import {heroServiceProvider} from "./heroService.provider";
+import {UserService} from "./UserService";
+
 @Component({
   selector: 'injectable-test',
   template: ``,
-  providers: [heroServiceProvider],
+  providers: [heroServiceProvider,UserService],
 })
 export class InjectableTest {
 
-    constructor(heroService:HeroService){
-      console.log(this.heroService.getName());
-    }
+  heroService:HeroService = this.injector.get(HeroService);
 
+  constructor(private injector:Injector) {
+    console.log(this.heroService.getName());
+  }
 
 
 }
